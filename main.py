@@ -106,7 +106,11 @@ class Student:
 
     def __str__(self):
         return f'Name: {self.name}\nSurname: {self.surname}\nСредняя оценка за домашние задания: {self.av_rating()}\nКурсы в процессе изучения: {", ".join(self.courses_in_progress)}\nЗавершенные курсы: {", ".join(self.finished_courses)}'
-
+    def __lt__(self, other):
+        if not isinstance(other, Student):
+            print("Нет в Student.")
+            return
+        return self.av_rating() < other.av_rating()
 class Mentor:
     def __init__(self, name, surname):
         self.name = name
@@ -142,6 +146,10 @@ class Lecturer(Mentor):
     def __str__(self):
         return f"Name: {self.name}\nSurname: {self.surname}\nСредняя оценка за лекции: {self.av_rating()}"
 
+    def __lt__(self, other):
+        if not isinstance(other, Lecturer):
+            print("Нет в Lecturer")
+        return self.av_rating() < other.av_rating()
 class Reviewer(Mentor):
     def __init__(self, name, surname):
         super().__init__(name, surname)
